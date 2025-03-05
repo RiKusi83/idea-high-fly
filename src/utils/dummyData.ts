@@ -103,5 +103,14 @@ export const IDEAS: Idea[] = [
     author: 'MellowDJ',
     createdAt: new Date('2023-06-06'),
     likes: 134
+  },
+  {
+    id: '11',
+    content: 'What if phones could take pictures of your dreams while you sleep and save them to a special dream album?',
+    category: 'picture',
+    highness: 5,
+    author: 'DreamShooter',
+    createdAt: new Date('2023-06-05'),
+    likes: 98
   }
 ];

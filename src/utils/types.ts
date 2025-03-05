@@ -8,6 +8,7 @@ export type Category =
   | 'tech'
   | 'music'
   | 'art'
+  | 'picture'
   | 'random';
 
 export type HighnessRating = 1 | 2 | 3 | 4 | 5;
