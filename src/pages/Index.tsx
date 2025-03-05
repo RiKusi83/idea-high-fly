@@ -39,7 +39,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-secondary/30">
+    <div className="min-h-screen bg-gradient-to-b from-green-50 to-green-100/50">
       <Header 
         selectedCategory={selectedCategory} 
         onSelectCategory={setSelectedCategory} 
@@ -48,15 +48,15 @@ const Index = () => {
       <main className="container px-4 sm:px-6 mx-auto py-6">
         <div className="max-w-2xl mx-auto">
           <div className="mb-8 text-center animate-fade-in">
-            <h1 className="font-bold mb-2">Share Your Elevated Ideas</h1>
-            <p className="text-muted-foreground">
+            <h1 className="font-bold mb-2 text-green-800">Share Your Elevated Ideas</h1>
+            <p className="text-green-700">
               Post your best high thoughts, rate how elevated you were, and browse ideas from others.
             </p>
             
             {!showNewIdeaForm && (
               <button
                 onClick={() => setShowNewIdeaForm(true)}
-                className="mt-4 inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-all duration-200 ease-in-out"
+                className="mt-4 inline-flex items-center justify-center rounded-lg bg-green-600 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 transition-all duration-200 ease-in-out"
               >
                 Share a new idea
               </button>
@@ -71,12 +71,12 @@ const Index = () => {
           
           {selectedCategory && (
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="font-semibold">
-                <span className="text-muted-foreground">Browsing</span> #{selectedCategory}
+              <h2 className="font-semibold text-green-800">
+                <span className="text-green-600">Browsing</span> #{selectedCategory}
               </h2>
               <button
                 onClick={() => setSelectedCategory(null)}
-                className="text-sm text-primary hover:underline"
+                className="text-sm text-green-600 hover:underline"
               >
                 Clear filter
               </button>
@@ -97,15 +97,15 @@ const Index = () => {
               ))
             ) : (
               <div className="text-center py-12">
-                <p className="text-lg font-medium">No ideas found</p>
-                <p className="text-muted-foreground mt-1">
+                <p className="text-lg font-medium text-green-800">No ideas found</p>
+                <p className="text-green-600 mt-1">
                   {selectedCategory 
                     ? `Be the first to share a high idea in #${selectedCategory}!` 
                     : 'Be the first to share a high idea!'}
                 </p>
                 <button
                   onClick={() => setShowNewIdeaForm(true)}
-                  className="mt-4 inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90 focus:outline-none"
+                  className="mt-4 inline-flex items-center justify-center rounded-lg bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 focus:outline-none"
                 >
                   Share a new idea
                 </button>
