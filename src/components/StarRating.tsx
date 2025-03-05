@@ -10,6 +10,7 @@ interface StarRatingProps {
   readonly?: boolean;
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+  colorScheme?: 'green' | 'yellow';
 }
 
 export const StarRating = ({ 
@@ -17,7 +18,8 @@ export const StarRating = ({
   onChange, 
   readonly = false, 
   size = 'md', 
-  className 
+  className,
+  colorScheme = 'green'
 }: StarRatingProps) => {
   const [hoverRating, setHoverRating] = useState<number | null>(null);
   
@@ -34,6 +36,19 @@ export const StarRating = ({
     md: 'h-5 w-5',
     lg: 'h-6 w-6'
   };
+
+  const getColorClass = (star: number, isFilled: boolean) => {
+    if (!isFilled) return 'text-muted';
+    
+    if (colorScheme === 'yellow') {
+      // Use yellow color scale
+      const intensity = Math.min(100 - (5 - star) * 10, 100);
+      return `text-yellow-${intensity}`;
+    } else {
+      // Use green color scale (default)
+      return `text-high-${star}`;
+    }
+  };
   
   return (
     <div 
@@ -44,7 +59,7 @@ export const StarRating = ({
     >
       {stars.map((star) => {
         const isFilled = (hoverRating || value) >= star;
-        const colorClass = `text-high-${star}`;
+        const colorClass = getColorClass(star, isFilled);
         
         return (
           <button
@@ -63,10 +78,10 @@ export const StarRating = ({
             <Star 
               className={cn(
                 sizeClasses[size],
-                isFilled ? colorClass : 'text-muted',
+                colorClass,
                 'transition-all duration-300 ease-in-out'
               )} 
-              fill={isFilled ? 'currentColor' : 'none'} 
+              fill={isFilled ? (colorScheme === 'yellow' ? '#FEF08A' : 'currentColor') : 'none'} 
             />
           </button>
         );

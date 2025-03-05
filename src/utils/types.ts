@@ -13,6 +13,13 @@ export type Category =
 
 export type HighnessRating = 1 | 2 | 3 | 4 | 5;
 
+export interface Comment {
+  id: string;
+  content: string;
+  author: string;
+  createdAt: Date;
+}
+
 export interface Idea {
   id: string;
   content: string;
@@ -21,4 +28,5 @@ export interface Idea {
   author: string;
   createdAt: Date;
   likes: number;
+  comments?: Comment[];
 }

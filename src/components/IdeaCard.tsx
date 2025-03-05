@@ -1,10 +1,10 @@
 
 import { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
-import { Idea } from '@/utils/types';
+import { Idea, Comment } from '@/utils/types';
 import { cn } from '@/lib/utils';
 import { StarRating } from './StarRating';
-import { Heart, MessageCircle, Share2 } from 'lucide-react';
+import { Heart, MessageCircle, Share2, Send } from 'lucide-react';
 
 interface IdeaCardProps {
   idea: Idea;
@@ -14,6 +14,9 @@ interface IdeaCardProps {
 export const IdeaCard = ({ idea, className }: IdeaCardProps) => {
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(idea.likes);
+  const [showComments, setShowComments] = useState(false);
+  const [comments, setComments] = useState<Comment[]>(idea.comments || []);
+  const [newComment, setNewComment] = useState('');
   
   const handleLike = () => {
     if (liked) {
@@ -22,6 +25,27 @@ export const IdeaCard = ({ idea, className }: IdeaCardProps) => {
       setLikeCount(likeCount + 1);
     }
     setLiked(!liked);
+  };
+  
+  const handleSubmitComment = () => {
+    if (!newComment.trim()) return;
+    
+    const comment: Comment = {
+      id: Date.now().toString(),
+      content: newComment,
+      author: 'You',
+      createdAt: new Date(),
+    };
+    
+    setComments([...comments, comment]);
+    setNewComment('');
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmitComment();
+    }
   };
   
   const timeAgo = formatDistanceToNow(idea.createdAt, { addSuffix: true });
@@ -46,7 +70,7 @@ export const IdeaCard = ({ idea, className }: IdeaCardProps) => {
         </div>
         <div className="flex items-center gap-1">
           <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">High Level:</span>
-          <StarRating value={idea.highness} readonly size="sm" />
+          <StarRating value={idea.highness} readonly size="sm" colorScheme="yellow" />
         </div>
       </div>
       
@@ -73,9 +97,12 @@ export const IdeaCard = ({ idea, className }: IdeaCardProps) => {
             <span>{likeCount}</span>
           </button>
           
-          <button className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors">
+          <button 
+            onClick={() => setShowComments(!showComments)}
+            className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors"
+          >
             <MessageCircle className="h-4 w-4" />
-            <span>Comment</span>
+            <span>{comments.length > 0 ? comments.length : 'Comment'}</span>
           </button>
           
           <button className="flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors">
@@ -84,6 +111,56 @@ export const IdeaCard = ({ idea, className }: IdeaCardProps) => {
           </button>
         </div>
       </div>
+
+      {showComments && (
+        <div className="mt-4 pt-4 border-t">
+          {comments.length > 0 ? (
+            <div className="space-y-3 mb-4">
+              {comments.map((comment) => (
+                <div key={comment.id} className="flex items-start gap-2">
+                  <div className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-secondary-foreground text-xs font-bold">
+                    {comment.author.charAt(0)}
+                  </div>
+                  <div className="flex-1">
+                    <div className="bg-muted/50 rounded-lg p-2 px-3">
+                      <p className="font-medium text-sm">{comment.author}</p>
+                      <p className="text-sm">{comment.content}</p>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {formatDistanceToNow(comment.createdAt, { addSuffix: true })}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-muted-foreground mb-3">Be the first to comment!</p>
+          )}
+
+          <div className="flex items-center gap-2 mt-2">
+            <div className="w-7 h-7 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs">
+              Y
+            </div>
+            <div className="flex-1 relative">
+              <textarea
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Write a comment..."
+                className="w-full rounded-lg bg-muted/30 border border-border px-3 py-2 text-sm min-h-[40px] max-h-[120px] resize-none focus:outline-none focus:ring-1 focus:ring-primary"
+                rows={1}
+              />
+              <button
+                onClick={handleSubmitComment}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-primary hover:text-primary/80 disabled:text-muted-foreground"
+                disabled={!newComment.trim()}
+              >
+                <Send className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

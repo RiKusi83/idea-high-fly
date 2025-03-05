@@ -1,5 +1,4 @@
-
-import { Category, Idea } from './types';
+import { Category, Idea, Comment } from './types';
 
 export const CATEGORIES: Category[] = [
   'movies',
@@ -14,6 +13,14 @@ export const CATEGORIES: Category[] = [
   'random'
 ];
 
+// Helper function to create comments with proper dates
+const createComment = (content: string, author: string, daysAgo: number): Comment => ({
+  id: Math.random().toString(36).substring(2, 9),
+  content,
+  author,
+  createdAt: new Date(Date.now() - daysAgo * 24 * 60 * 60 * 1000)
+});
+
 export const IDEAS: Idea[] = [
   {
     id: '1',
@@ -22,7 +29,12 @@ export const IDEAS: Idea[] = [
     highness: 4,
     author: 'DarthToker',
     createdAt: new Date('2023-06-15'),
-    likes: 42
+    likes: 42,
+    comments: [
+      createComment('This would explain so much about Jar Jar Binks', 'ForceUser420', 2),
+      createComment('I\'d watch an extended edition with this theory explained', 'SkywalkerKush', 1),
+      createComment('My mind is blown right now 🤯', 'YodaBongz', 0)
+    ]
   },
   {
     id: '2',
@@ -31,7 +43,13 @@ export const IDEAS: Idea[] = [
     highness: 3,
     author: 'ChefBoyarWeed',
     createdAt: new Date('2023-06-14'),
-    likes: 127
+    likes: 127,
+    comments: [
+      createComment('This is literally how my grandma cooks and her food slaps', 'MunchieMonster', 3),
+      createComment('Would buy this in a heartbeat 😂', 'BakedBaker', 2),
+      createComment('Add a chapter about what to cook when you have the munchies', 'SnackAttack', 1),
+      createComment('Maybe call it "High Cuisine: A Stoner\'s Cookbook"', 'CulinaryStoner', 0)
+    ]
   },
   {
     id: '3',
@@ -40,7 +58,12 @@ export const IDEAS: Idea[] = [
     highness: 5,
     author: 'PhilosophicalToker',
     createdAt: new Date('2023-06-13'),
-    likes: 89
+    likes: 89,
+    comments: [
+      createComment('Bro, I think about this EVERY time I park my car', 'DeepThoughts', 2),
+      createComment('English is wild man', 'WordWizard', 1),
+      createComment('Now I can\'t unsee this', 'MindBlown420', 0)
+    ]
   },
   {
     id: '4',
@@ -49,7 +72,13 @@ export const IDEAS: Idea[] = [
     highness: 2,
     author: 'BrokeGradStudent',
     createdAt: new Date('2023-06-12'),
-    likes: 231
+    likes: 231,
+    comments: [
+      createComment('The scariest movie ever made', 'DebtRidden', 3),
+      createComment('Too real man, too real', 'JobHunter', 2),
+      createComment('I\'m already living in this horror movie 😭', 'RamenBudget', 1),
+      createComment('Plot twist: there\'s no escape', 'CapitalismVictim', 0)
+    ]
   },
   {
     id: '5',
@@ -58,7 +87,12 @@ export const IDEAS: Idea[] = [
     highness: 4,
     author: 'PlantWhisperer',
     createdAt: new Date('2023-06-11'),
-    likes: 56
+    likes: 56,
+    comments: [
+      createComment('I\'m gonna go apologize to my plants right now', 'GreenThumb', 2),
+      createComment('This explains why my plants always die... they\'re depressed 😔', 'PlantKiller', 1),
+      createComment('Maybe that\'s why some people\'s gardens thrive - they\'re giving good vibes', 'GardenGuru', 0)
+    ]
   },
   {
     id: '6',
@@ -67,7 +101,8 @@ export const IDEAS: Idea[] = [
     highness: 5,
     author: 'TimeCop420',
     createdAt: new Date('2023-06-10'),
-    likes: 78
+    likes: 78,
+    comments: []
   },
   {
     id: '7',
@@ -76,7 +111,8 @@ export const IDEAS: Idea[] = [
     highness: 5,
     author: 'ExistentialDread',
     createdAt: new Date('2023-06-09'),
-    likes: 101
+    likes: 101,
+    comments: []
   },
   {
     id: '8',
@@ -85,7 +121,8 @@ export const IDEAS: Idea[] = [
     highness: 3,
     author: 'FridgeMatcher',
     createdAt: new Date('2023-06-08'),
-    likes: 45
+    likes: 45,
+    comments: []
   },
   {
     id: '9',
@@ -94,7 +131,8 @@ export const IDEAS: Idea[] = [
     highness: 2,
     author: 'FairFoodie',
     createdAt: new Date('2023-06-07'),
-    likes: 67
+    likes: 67,
+    comments: []
   },
   {
     id: '10',
@@ -103,7 +141,8 @@ export const IDEAS: Idea[] = [
     highness: 4,
     author: 'MellowDJ',
     createdAt: new Date('2023-06-06'),
-    likes: 134
+    likes: 134,
+    comments: []
   },
   {
     id: '11',
@@ -112,7 +151,8 @@ export const IDEAS: Idea[] = [
     highness: 5,
     author: 'DreamShooter',
     createdAt: new Date('2023-06-05'),
-    likes: 98
+    likes: 98,
+    comments: []
   },
   {
     id: '12',
@@ -121,7 +161,8 @@ export const IDEAS: Idea[] = [
     highness: 3,
     author: 'StonedComedian',
     createdAt: new Date('2023-06-04'),
-    likes: 73
+    likes: 73,
+    comments: []
   },
   {
     id: '13',
@@ -130,7 +171,8 @@ export const IDEAS: Idea[] = [
     highness: 5,
     author: 'CloudGazer420',
     createdAt: new Date('2023-06-03'),
-    likes: 82
+    likes: 82,
+    comments: []
   },
   {
     id: '14',
@@ -139,7 +181,8 @@ export const IDEAS: Idea[] = [
     highness: 4,
     author: 'PetWhisperer',
     createdAt: new Date('2023-06-02'),
-    likes: 156
+    likes: 156,
+    comments: []
   },
   {
     id: '15',
@@ -148,7 +191,8 @@ export const IDEAS: Idea[] = [
     highness: 3,
     author: 'HighCinephile',
     createdAt: new Date('2023-06-01'),
-    likes: 91
+    likes: 91,
+    comments: []
   },
   {
     id: '16',
@@ -157,7 +201,8 @@ export const IDEAS: Idea[] = [
     highness: 5,
     author: 'BakedArtist',
     createdAt: new Date('2023-05-31'),
-    likes: 112
+    likes: 112,
+    comments: []
   },
   {
     id: '17',
@@ -166,7 +211,8 @@ export const IDEAS: Idea[] = [
     highness: 4,
     author: 'EmotionalChef',
     createdAt: new Date('2023-05-30'),
-    likes: 88
+    likes: 88,
+    comments: []
   },
   {
     id: '18',
@@ -175,7 +221,8 @@ export const IDEAS: Idea[] = [
     highness: 5,
     author: 'DinoEnthusiast',
     createdAt: new Date('2023-05-29'),
-    likes: 105
+    likes: 105,
+    comments: []
   },
   {
     id: '19',
@@ -184,7 +231,8 @@ export const IDEAS: Idea[] = [
     highness: 5,
     author: 'GiggleWeed',
     createdAt: new Date('2023-05-28'),
-    likes: 132
+    likes: 132,
+    comments: []
   },
   {
     id: '20',
@@ -193,7 +241,8 @@ export const IDEAS: Idea[] = [
     highness: 4,
     author: 'ScentShooter',
     createdAt: new Date('2023-05-27'),
-    likes: 77
+    likes: 77,
+    comments: []
   },
   {
     id: '21',
@@ -202,7 +251,8 @@ export const IDEAS: Idea[] = [
     highness: 3,
     author: 'LitWit420',
     createdAt: new Date('2023-05-26'),
-    likes: 65
+    likes: 65,
+    comments: []
   },
   {
     id: '22',
@@ -211,7 +261,8 @@ export const IDEAS: Idea[] = [
     highness: 5,
     author: 'SensoryOverload',
     createdAt: new Date('2023-05-25'),
-    likes: 94
+    likes: 94,
+    comments: []
   },
   {
     id: '23',
@@ -220,7 +271,8 @@ export const IDEAS: Idea[] = [
     highness: 4,
     author: 'DreamyArtist',
     createdAt: new Date('2023-05-24'),
-    likes: 81
+    likes: 81,
+    comments: []
   },
   {
     id: '24',
@@ -229,7 +281,8 @@ export const IDEAS: Idea[] = [
     highness: 5,
     author: 'SimulationToker',
     createdAt: new Date('2023-05-23'),
-    likes: 145
+    likes: 145,
+    comments: []
   },
   {
     id: '25',
@@ -238,7 +291,8 @@ export const IDEAS: Idea[] = [
     highness: 3,
     author: 'BreakfastThinker',
     createdAt: new Date('2023-05-22'),
-    likes: 72
+    likes: 72,
+    comments: []
   },
   {
     id: '26',
@@ -247,7 +301,8 @@ export const IDEAS: Idea[] = [
     highness: 4,
     author: 'AnimalMindReader',
     createdAt: new Date('2023-05-21'),
-    likes: 108
+    likes: 108,
+    comments: []
   },
   {
     id: '27',
@@ -256,7 +311,8 @@ export const IDEAS: Idea[] = [
     highness: 3,
     author: 'GlobalHumor',
     createdAt: new Date('2023-05-20'),
-    likes: 63
+    likes: 63,
+    comments: []
   },
   {
     id: '28',
@@ -265,7 +321,8 @@ export const IDEAS: Idea[] = [
     highness: 4,
     author: 'BabyLogic',
     createdAt: new Date('2023-05-19'),
-    likes: 97
+    likes: 97,
+    comments: []
   },
   {
     id: '29',
@@ -274,7 +331,8 @@ export const IDEAS: Idea[] = [
     highness: 2,
     author: 'CinemaRebel',
     createdAt: new Date('2023-05-18'),
-    likes: 49
+    likes: 49,
+    comments: []
   },
   {
     id: '30',
@@ -283,6 +341,51 @@ export const IDEAS: Idea[] = [
     highness: 3,
     author: 'FortunateSoul',
     createdAt: new Date('2023-05-17'),
-    likes: 86
+    likes: 86,
+    comments: []
+  },
+  {
+    id: '31',
+    content: 'What if we could take pictures of our dreams and create galleries of our subconscious adventures?',
+    category: 'picture',
+    highness: 5,
+    author: 'DreamCatcher',
+    createdAt: new Date('2023-05-16'),
+    likes: 119,
+    comments: [
+      createComment('I\'d have a whole gallery of flying dreams', 'NightFlyer', 3),
+      createComment('My dream gallery would be wild. Half awesome adventures, half being late for exams I graduated from years ago', 'SleepyHead', 2),
+      createComment('Imagine being able to share dream photos with friends', 'DreamTeam', 1),
+      createComment('Add dream filters to make them even trippier', 'PsychedelicSleeper', 0)
+    ]
+  },
+  {
+    id: '32',
+    content: 'An app that lets you take pictures of colors in real life and then tells you the exact color code so you can use it in designs',
+    category: 'picture',
+    highness: 3,
+    author: 'ColorHunter',
+    createdAt: new Date('2023-05-15'),
+    likes: 87,
+    comments: [
+      createComment('That would be so useful for my design projects!', 'DigitalArtist', 2),
+      createComment('I think this actually exists but I can never find it when I need it', 'ForgetfulCreator', 1),
+      createComment('Add a feature that suggests complementary colors too', 'PaletteProdigy', 0)
+    ]
+  },
+  {
+    id: '33',
+    content: 'A social network where you can only communicate through pictures of your pets doing silly things',
+    category: 'picture',
+    highness: 4,
+    author: 'PetMeme',
+    createdAt: new Date('2023-05-14'),
+    likes: 143,
+    comments: [
+      createComment('I would finally have a reason to make my cat wear funny hats', 'CatParent', 3),
+      createComment('Best. Social. Network. Ever.', 'DoggoLover', 2),
+      createComment('My hamster would be an influencer for sure', 'RodentWhisperer', 1),
+      createComment('I\'d sign up in a heartbeat!', 'PetPortraitist', 0)
+    ]
   }
 ];
